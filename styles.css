@@ -1,120 +1,309 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
-    background: linear-gradient(135deg, #90cae7d8 0%, #03668e 100%);
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-attachment: fixed;
-    position: relative;
-}
-
-.background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 0;
-}
-
-.signup-container {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 20px;  /* Reduced padding */
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 320px;
+    margin: 0;
+    background-color: rgb(5, 5, 70);
+    background: linear-gradient(135deg, #90cae7d8 0%, #03668e 100%);
+  }
+  
+  .login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+  }
+  
+  .login-container h2 {
     text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-.signup-container h1 {
-    margin-bottom: 15px;  /* Reduced margin */
     color: #333;
-    font-size: 24px;
-}
-
-.signup-container p {
-    margin-bottom: 15px;  /* Reduced margin */
-    color: #555;
-    font-size: 16px;
-}
-
-.form-group {
-    margin-bottom: 15px;  /* Reduced margin */
-    text-align: left;
-}
-
-.form-group label {
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
     display: block;
-    margin-bottom: 5px;
-    color: #555;
-    font-weight: 600;
-}
-
-.form-group input, .form-group select {
+    font-weight: bold;
+  }
+  
+  .form-group input {
     width: 100%;
-    padding: 8px;  /* Reduced padding */
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.form-group input:focus, .form-group select:focus {
-    outline: none;
-    border-color: #6B73FF;
-    box-shadow: 0 0 5px rgba(107, 115, 255, 0.5);
-}
-
-.signup-button {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
     width: 100%;
-    padding: 10px;  /* Reduced padding */
-    background-color: #28a745;
+    padding: 10px;
+    background-color: rgb(5, 5, 70);
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: rgb(5, 5, 70);
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
     margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
+  }
 
-.signup-button:hover {
-    background-color: #218838;
-}
 
-.signup-container a {
-    color: #007bff;
+  /* Dashboard */
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: navy;
+    color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .center-box .box {
+    text-align: center;
+    margin: 0 auto;
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 200px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  nav {
+    text-align: center; /* Centers the navigation links */
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Removes default margin */
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
     text-decoration: none;
-    font-weight: 600;
-}
+  }
+  
+  .dashboard-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows sections to wrap into a new line on smaller screens */
+    justify-content: space-around; /* Distributes sections evenly */
+    align-items: flex-start; /* Align items to the top */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .summary-section, .chart-section, .goals-section, .alerts-section, .center-box {
+    flex: 1; /* Each section takes equal space */
+    margin: 10px;
+  }
+  
+  .summary {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .summary-item {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .chart-section canvas {
+    width: 100%;
+  }
+  
+  .savings-goals {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .goal-item {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .alerts {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .center-box .box {
+    width: 200px;
+    height: 200px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
 
-.signup-container a:hover {
-    text-decoration: underline;
-}
 
-.signup-container p:last-of-type {
-    margin-top: 15px;  /* Reduced margin */
-}
+  /* styles.css */
+
+/* Add styles as needed for transactions page */
+.transactions-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filters-section {
+    margin-bottom: 30px;
+  }
+  
+  .filters-section label {
+    margin-right: 10px;
+  }
+  
+  .transactions-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .transactions-list th, .transactions-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .transactions-list th {
+    background-color: rgb(5, 5, 70);
+    color: #fff;
+  }
+  
+  .transactions-list td {
+    background-color: #fff;
+  }
+  
+  .transactions-list td.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .transactions-list td.actions button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .transactions-list td.actions button:hover {
+    background-color: #c82333;
+  }
 
 
+  /* styles.css */
 
-
-
-
-
-
-
-
-
-
-
-
+/* Add styles as needed for goals page */
+.goals-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .goals-list {
+    margin-bottom: 30px;
+  }
+  
+  .add-goal {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 5px;
+    background-color: rgb(5, 5, 70);
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: rgb(5, 5, 70);
+  }
+  
+  
+  
+  
