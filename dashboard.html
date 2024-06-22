@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  
   <link rel="stylesheet" href="styles.css">
-  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -23,7 +21,7 @@
 
   <div class="wrapper">
     <main class="dashboard-container">
-      <section class="summary-section">
+      <section class="summary-section section-box">
         <h2>Financial Summary</h2>
         <div class="summary">
           <div class="summary-item">
@@ -37,12 +35,12 @@
         </div>
       </section>
 
-      <section class="chart-section">
+      <section class="chart-section section-box">
         <h2>Spending Categories</h2>
         <canvas id="spendingChart" width="400" height="200"></canvas>
       </section>
 
-      <section class="goals-section">
+      <section class="goals-section section-box">
         <h2>Savings Goals</h2>
         <div class="savings-goals">
           <div class="goal-item">
@@ -53,14 +51,14 @@
         </div>
       </section>
 
-      <section class="alerts-section">
+      <section class="alerts-section section-box">
         <h2>Alerts</h2>
         <div class="alerts">
           <p>No alerts at the moment.</p>
         </div>
       </section>
 
-      <section class="center-box">
+      <section class="center-box section-box">
         <div class="box">Centered Box</div>
       </section>
     </main>
@@ -73,3 +71,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+

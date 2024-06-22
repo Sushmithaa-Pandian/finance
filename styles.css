@@ -67,28 +67,31 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes up at least the full viewport height */
   }
   
   header {
     background-color: navy;
     color: #fff;
-    padding: 20px 0;
-    position: fixed;
-    top: 0;
+    padding: 45px 0;
     width: 100%;
-    z-index: 1000;
-  }
-
-  .center-box .box {
     text-align: center;
-    margin: 0 auto;
-    background-color: #f4f4f4;
+  }
+  
+  .dashboard-title {
+    background-color: #f0f0f0;
     padding: 20px;
-    width: 200px;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   header h1 {
     margin: 0;
+    font-size: 2em; /* Adjust as needed */
   }
   
   nav {
@@ -111,81 +114,63 @@ body {
     text-decoration: none;
   }
   
+  .wrapper {
+    flex:0; /* Allow wrapper to take up remaining vertical space */
+    padding-top: 80px; /* Create space for the fixed header */
+    padding-bottom: 20px; /* Ensure space for the footer */
+    
+  }
+  
   .dashboard-container {
     display: flex;
-    flex-wrap: wrap; /* Allows sections to wrap into a new line on smaller screens */
-    justify-content: space-around; /* Distributes sections evenly */
-    align-items: flex-start; /* Align items to the top */
-    max-width: 1200px;
-    margin: 20px auto;
+    justify-content: space-around;
+    max-width: 1400px;
+    margin: 0 auto; /* Center the container horizontally */
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0a0;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  .summary-section, .chart-section, .goals-section, .alerts-section, .center-box {
-    flex: 1; /* Each section takes equal space */
+  .section-box {
+    flex: 1;
     margin: 10px;
-  }
-  
-  .summary {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .summary-item {
-    padding: 10px;
+    padding: 20px;
     background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .section-box h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  .summary-item,
+  .goal-item,
+  .alert-item {
+    padding: 10px;
+    background-color: #f4f4f4;
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-bottom: 10px;
   }
   
   .chart-section canvas {
     width: 100%;
   }
   
-  .savings-goals {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .goal-item {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .alerts {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .center-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .center-box .box {
-    width: 200px;
-    height: 200px;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ccc;
-  }
-  
   footer {
     text-align: center;
-    margin-top: 20px;
+    padding: 10px 0;
+    
+    color: #040404;
+    width: 100%;
   }
+  
+  
   
 
 
@@ -196,7 +181,7 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0a6;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
