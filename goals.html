@@ -97,8 +97,8 @@
     button {
       padding: 10px 18px;
       cursor: pointer;
-      background-color:#dc3545;
-      color: white;
+      background-color: #333;
+      color: #fff;
       border: none;
       border-radius: 3px;
     }
@@ -164,83 +164,139 @@
     
   </footer>
 
-  <script>
-    // JavaScript code
-    document.addEventListener('DOMContentLoaded', function() {
-      const goalsList = document.getElementById('goalsList');
-      const addGoalForm = document.getElementById('addGoalForm');
 
-      let goals = [
-        { id: 1, name: 'Vacation Fund', amount: 2000.00, saved: 1000.00 },
-        { id: 2, name: 'Emergency Fund', amount: 5000.00, saved: 2500.00 }
-      ];
+<script>
+// JavaScript code
+document.addEventListener('DOMContentLoaded', function() {
+  const goalsList = document.getElementById('goalsList');
+  const addGoalForm = document.getElementById('addGoalForm');
 
-      function renderGoals() {
-        goalsList.innerHTML = '';
+  let goals = [
+    { id: 1, name: 'Vacation Fund', amount: 2000.00, saved: 1000.00 },
+    { id: 2, name: 'Emergency Fund', amount: 5000.00, saved: 2500.00 }
+  ];
 
-        goals.forEach(goal => {
-          const goalCard = document.createElement('div');
-          goalCard.classList.add('goal-card');
-          goalCard.innerHTML = `
-            <h3>${goal.name}</h3>
-            <p>Goal Amount: $${goal.amount.toFixed(2)}</p>
-            <p>Saved: $${goal.saved.toFixed(2)}</p>
-            <progress value="${goal.saved}" max="${goal.amount}"></progress>
-            <div class="goal-actions">
-              <button class="edit-goal" data-id="${goal.id}">Edit</button>
-              <button class="delete-goal" data-id="${goal.id}">Delete</button>
-            </div>
-          `;
-          goalsList.appendChild(goalCard);
-        });
-      }
+  function renderGoals() {
+    goalsList.innerHTML = '';
 
-      renderGoals();
-
-      addGoalForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const goalName = addGoalForm.goalName.value.trim();
-        const goalAmount = parseFloat(addGoalForm.goalAmount.value);
-
-        if (goalName && goalAmount > 0) {
-          const id = goals.length > 0 ? goals[goals.length - 1].id + 1 : 1;
-          const newGoal = {
-            id,
-            name: goalName,
-            amount: goalAmount,
-            saved: 0
-          };
-
-          goals.push(newGoal);
-          renderGoals();
-          addGoalForm.reset();
-        } else {
-          alert('Please enter valid goal name and amount.');
-        }
-      });
-
-      goalsList.addEventListener('click', function(event) {
-        if (event.target.classList.contains('edit-goal')) {
-          const id = parseInt(event.target.getAttribute('data-id'), 10);
-          editGoal(id);
-        } else if (event.target.classList.contains('delete-goal')) {
-          const id = parseInt(event.target.getAttribute('data-id'), 10);
-          deleteGoal(id);
-        }
-      });
-
-      function editGoal(id) {
-        alert(`Editing goal with ID ${id}`);
-      }
-
-      function deleteGoal(id) {
-        if (confirm(`Are you sure you want to delete goal with ID ${id}?`)) {
-          goals = goals.filter(goal => goal.id !== id);
-          renderGoals();
-        }
-      }
+    goals.forEach(goal => {
+      const goalCard = document.createElement('div');
+      goalCard.classList.add('goal-card');
+      goalCard.innerHTML = `
+        <h3>${goal.name}</h3>
+        <input type="text" class="edit-name" value="${goal.name}" style="display:none;">
+        <p>Goal Amount: $<span class="display-amount">${goal.amount.toFixed(2)}</span></p>
+        <input type="number" class="edit-amount" value="${goal.amount.toFixed(2)}" style="display:none;">
+        <p>Saved: $<span class="display-saved">${goal.saved.toFixed(2)}</span></p>
+        <input type="number" class="edit-saved" value="${goal.saved.toFixed(2)}" style="display:none;">
+        <progress value="${goal.saved}" max="${goal.amount}" class="goal-progress"></progress>
+        <div class="goal-actions">
+          <button class="edit-goal" data-id="${goal.id}">Edit</button>
+          <button class="save-goal" data-id="${goal.id}" style="display:none;">Save</button>
+          <button class="cancel-goal" data-id="${goal.id}" style="display:none;">Cancel</button>
+          <button class="delete-goal" data-id="${goal.id}">Delete</button>
+        </div>
+      `;
+      goalsList.appendChild(goalCard);
     });
-  </script>
+  }
+
+  renderGoals();
+
+  addGoalForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const goalName = addGoalForm.goalName.value.trim();
+    const goalAmount = parseFloat(addGoalForm.goalAmount.value);
+
+    if (goalName && goalAmount > 0) {
+      const id = goals.length > 0 ? goals[goals.length - 1].id + 1 : 1;
+      const newGoal = {
+        id,
+        name: goalName,
+        amount: goalAmount,
+        saved: 0
+      };
+
+      goals.push(newGoal);
+      renderGoals();
+      addGoalForm.reset();
+    } else {
+      alert('Please enter valid goal name and amount.');
+    }
+  });
+
+  goalsList.addEventListener('click', function(event) {
+    const id = parseInt(event.target.getAttribute('data-id'), 10);
+
+    if (event.target.classList.contains('edit-goal')) {
+      toggleEditMode(id, true);
+    } else if (event.target.classList.contains('save-goal')) {
+      saveGoal(id);
+    } else if (event.target.classList.contains('cancel-goal')) {
+      toggleEditMode(id, false);
+    } else if (event.target.classList.contains('delete-goal')) {
+      deleteGoal(id);
+    }
+  });
+
+  function toggleEditMode(id, isEditing) {
+    const goalCard = document.querySelector(`.goal-card button[data-id="${id}"]`).parentElement.parentElement;
+    const editFields = goalCard.querySelectorAll('.edit-name, .edit-amount, .edit-saved');
+    const displayFields = goalCard.querySelectorAll('h3, .display-amount, .display-saved');
+    const buttons = goalCard.querySelectorAll('.edit-goal, .save-goal, .cancel-goal');
+
+    editFields.forEach(field => field.style.display = isEditing ? 'inline' : 'none');
+    displayFields.forEach(field => field.style.display = isEditing ? 'none' : 'inline');
+    buttons[0].style.display = isEditing ? 'none' : 'inline'; // Edit button
+    buttons[1].style.display = isEditing ? 'inline' : 'none'; // Save button
+    buttons[2].style.display = isEditing ? 'inline' : 'none'; // Cancel button
+
+    // Ensure progress bar visibility
+    const progressBar = goalCard.querySelector('.goal-progress');
+    if (progressBar) {
+      progressBar.style.display = 'block';
+      progressBar.style.position = 'relative';
+      
+      progressBar.style.right = '200px';
+
+    }
+  }
+
+  function saveGoal(id) {
+    const goalCard = document.querySelector(`.goal-card button[data-id="${id}"]`).parentElement.parentElement;
+    const goal = goals.find(goal => goal.id === id);
+
+    if (goal) {
+      const newName = goalCard.querySelector('.edit-name').value.trim();
+      const newAmount = parseFloat(goalCard.querySelector('.edit-amount').value);
+      const newSaved = parseFloat(goalCard.querySelector('.edit-saved').value);
+
+      if (newName && !isNaN(newAmount) && !isNaN(newSaved)) {
+        goal.name = newName;
+        goal.amount = newAmount;
+        goal.saved = newSaved;
+        renderGoals();
+      } else {
+        alert('Invalid input. Please try again.');
+      }
+    }
+  }
+
+  function deleteGoal(id) {
+    if (confirm(`Are you sure you want to delete goal with ID ${id}?`)) {
+      goals = goals.filter(goal => goal.id !== id);
+      renderGoals();
+    }
+  }
+});
+
+
+</script>
+
+    
+
+
+
 </body>
 </html>
