@@ -112,6 +112,81 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const transactionTableBody = document.getElementById('transactionTableBody');
+
+  let transactions = [
+    { id: 1, date: '2024-07-01', category: 'Groceries', description: 'Supermarket', amount: 150.00 },
+    { id: 2, date: '2024-07-02', category: 'Utilities', description: 'Electric Bill', amount: 100.00 },
+    { id: 3,date: '2024-06-24', category: 'Entertainment', description: 'Movie tickets', amount: 25.00 },
+    { id: 4, date: '2024-06-23', category: 'Transportation', description: 'Gas refill', amount: 40.00 },
+  ];
+
+  function renderTransactions() {
+    transactionTableBody.innerHTML = '';
+
+    transactions.forEach(transaction => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${transaction.date}</td>
+        <td>${transaction.category}</td>
+        <td>${transaction.description}</td>
+        <td>$<span class="display-amount">${transaction.amount.toFixed(2)}</span></td>
+        <input type="number" class="edit-amount" value="${transaction.amount.toFixed(2)}" style="display:none;">
+        <td>
+          <button class="edit-transaction" data-id="${transaction.id}">Edit</button>
+          <button class="save-transaction" data-id="${transaction.id}" style="display:none;">Save</button>
+          <button class="cancel-transaction" data-id="${transaction.id}" style="display:none;">Cancel</button>
+        </td>
+      `;
+      transactionTableBody.appendChild(tr);
+    });
+  }
+
+  renderTransactions();
+
+  transactionTableBody.addEventListener('click', function(event) {
+    const id = parseInt(event.target.getAttribute('data-id'), 10);
+
+    if (event.target.classList.contains('edit-transaction')) {
+      toggleEditMode(id, true);
+    } else if (event.target.classList.contains('save-transaction')) {
+      saveTransaction(id);
+    } else if (event.target.classList.contains('cancel-transaction')) {
+      toggleEditMode(id, false);
+    }
+  });
+
+  function toggleEditMode(id, isEditing) {
+    const transactionRow = document.querySelector(`button[data-id="${id}"]`).parentElement.parentElement;
+    const editFields = transactionRow.querySelectorAll('.edit-amount');
+    const displayFields = transactionRow.querySelectorAll('.display-amount');
+    const buttons = transactionRow.querySelectorAll('.edit-transaction, .save-transaction, .cancel-transaction');
+
+    editFields.forEach(field => field.style.display = isEditing ? 'inline' : 'none');
+    displayFields.forEach(field => field.style.display = isEditing ? 'none' : 'inline');
+    buttons[0].style.display = isEditing ? 'none' : 'inline'; // Edit button
+    buttons[1].style.display = isEditing ? 'inline' : 'none'; // Save button
+    buttons[2].style.display = isEditing ? 'inline' : 'none'; // Cancel button
+  }
+
+  function saveTransaction(id) {
+    const transactionRow = document.querySelector(`button[data-id="${id}"]`).parentElement.parentElement;
+    const transaction = transactions.find(transaction => transaction.id === id);
+
+    if (transaction) {
+      const newAmount = parseFloat(transactionRow.querySelector('.edit-amount').value);
+
+      if (!isNaN(newAmount)) {
+        transaction.amount = newAmount;
+        renderTransactions();
+      } else {
+        alert('Invalid input. Please try again.');
+      }
+    }
+  }
+});
+
 
   // script.js
 
